@@ -1,0 +1,90 @@
+@startuml
+'Group A
+'Period = 3
+'Execution Time = 1
+'Priority = Medium
+robust "Task A" as task_a
+concise "Task A Period #" as task_a_period
+
+'Group B
+'Period = 5
+'Execution Time = 2
+'Priority = Low
+robust "Task B" as task_b
+concise "Task B Period #" as task_b_period
+
+'Group C
+'Period = 2
+'Execution Time = 0.5
+'Priority = High
+robust "Task C" as task_c
+concise "Task C Period #" as task_c_period
+
+@-1
+task_a is Idle
+task_b is Idle
+task_c is Idle
+
+@0
+task_a_period is 1
+task_b_period is 1
+task_c_period is 1
+
+task_c is Processing
+
+@0.5
+task_a is Processing
+task_c is Idle
+'Task C done until 2
+
+@1
+task_a is Processing
+task_b is Idle
+
+@1.5
+task_a is Idle
+task_b is Processing
+'Task A done until 3
+
+@2
+task_c_period is 2
+task_c_period -> task_c : Deadline
+
+task_b is Waiting
+task_c is Processing
+
+
+@2.5
+task_b is Processing
+task_c is Idle
+'Task C done until 4
+
+@3
+task_a_period is 2
+task_a_period -> task_a : Deadline
+
+task_a is Processing
+task_b is Waiting
+
+@4
+task_c_period is 3
+task_c_period -> task_c : Deadline
+
+task_a is Idle
+task_c is Processing
+
+@4.5
+task_b is Processing
+task_c is Idle
+
+@5
+task_b_period is 2
+task_b_period -> task_b : Deadline (Missed)
+
+@5.5
+task_b is Idle
+
+@6
+task_c_period is 4
+task_a_period is 3
+@enduml

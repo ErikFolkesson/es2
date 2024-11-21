@@ -1,0 +1,103 @@
+@startuml
+'Group A
+'Period = 3
+'Execution Time = 1
+robust "Task A" as task_a
+concise "Task A Period #" as task_a_period
+
+'Group B
+'Period = 4
+'Execution Time = 1
+robust "Task B" as task_b
+concise "Task B Period #" as task_b_period
+
+'Group C
+'Period = 6
+'Execution Time = 2
+robust "Task C" as task_c
+concise "Task C Period #" as task_c_period
+
+'--- RM ---
+
+@-1
+task_a is Idle
+task_b is Idle
+task_c is Idle
+
+@0
+task_a_period is 1
+task_b_period is 1
+task_c_period is 1
+
+task_a is Execution
+
+@1
+task_a is Idle
+task_a_period -> task_a : Done
+
+task_b is Execution
+
+@2
+task_b is Idle
+task_b_period -> task_b : Done
+
+task_c is Execution
+
+@3
+task_c is Waiting
+task_c_period -> task_c : Preempt by A
+
+task_a is Execution
+
+@4
+task_a is Idle
+task_a_period -> task_a : Done
+
+task_b is Execution
+
+@5
+task_b is Idle
+task_b_period -> task_b : Done
+
+task_c is Execution
+
+@6
+task_c is Waiting
+task_c_period -> task_c : Preempt by A - Missed Deadline!
+
+task_a is Execution
+
+
+'---
+@3
+task_a_period is 2
+task_a_period -> task_a : Deadline
+
+@4
+task_b_period is 2
+task_b_period -> task_b : Deadline
+
+@6
+task_c_period is 2
+task_c_period -> task_c :
+
+task_a_period is 3
+task_a_period -> task_a : Deadline
+
+@8
+task_b_period is 3
+task_b_period -> task_b : Deadline
+
+@9
+task_a_period is 4
+task_a_period -> task_a : Deadline
+
+@12
+task_a_period is 5
+task_a_period -> task_a : Deadline
+
+task_b_period is 4
+task_b_period -> task_b : Deadline
+
+task_c_period is 3
+task_c_period -> task_c : Deadline

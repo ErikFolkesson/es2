@@ -1,0 +1,160 @@
+@startuml
+'Group A
+'Period = 10
+'Execution Time = 3
+robust "Task A" as task_a
+concise "Task A Period #" as task_a_period
+
+'Group B
+'Period = 14
+'Execution Time = 3
+robust "Task B" as task_b
+concise "Task B Period #" as task_b_period
+
+'Group C
+'Period = 13
+'Execution Time = 2
+robust "Task C" as task_c
+concise "Task C Period #" as task_c_period
+
+'Group D
+'Period = 8
+'Execution Time = 2
+robust "Task D" as task_d
+concise "Task D Period #" as task_d_period
+
+'EDF
+
+@-1
+task_a is Idle
+task_b is Idle
+task_c is Idle
+task_d is Idle
+
+@0
+task_a_period is 1
+task_b_period is 1
+task_c_period is 1
+task_d_period is 1
+
+task_d is Execution
+
+@2
+task_d is Idle
+task_d_period -> task_d : Done
+
+task_a is Execution
+
+@5
+task_a is Idle
+task_a_period -> task_a : Done
+
+task_c is Execution
+
+@7
+task_c is Idle
+task_c_period -> task_c : Done
+
+task_b is Execution
+
+@10
+task_b is Idle
+task_b_period -> task_b : Done
+
+task_d is Execution
+
+@12
+task_d is Idle
+task_d_period -> task_d : Done
+
+task_a is Execution
+
+@15
+task_a is Idle
+task_a_period -> task_a : Done
+
+task_c is Execution
+
+@16
+task_c is Waiting
+task_c_period -> task_c : Preempted by D
+
+task_d is Execution
+
+@18
+task_d is Idle
+task_d_period -> task_d : Done
+
+task_c is Execution
+
+@19
+task_c is Idle
+task_c_period -> task_c : Done
+
+task_b is Execution
+
+@22
+task_b is Idle
+task_b_period -> task_b : Done
+
+task_a is Execution
+
+@25
+task_a is Idle
+task_a_period -> task_a : Done
+
+task_d is Execution
+
+@27
+task_d is Idle
+task_d_period -> task_d : Done
+
+task_c is Execution
+
+@29
+task_c is Idle
+task_c_period -> task_c : Done
+
+task_b is Execution
+
+'-------------------------------
+
+@8
+task_d_period is 2
+task_d_period -> task_d : Deadline
+
+@10
+task_a_period is 2
+task_a_period -> task_a : Deadline
+
+@13
+task_c_period is 2
+task_c_period -> task_c : Deadline
+
+@14
+task_b_period is 2
+task_b_period -> task_b : Deadline
+
+@16
+task_d_period is 3
+task_d_period -> task_d : Deadline
+
+@20
+task_a_period is 3
+task_a_period -> task_a : Deadline
+
+@24
+task_d_period is 4
+task_d_period -> task_d : Deadline
+
+@26
+task_c_period is 3
+task_c_period -> task_c : Deadline
+
+@28
+task_b_period is 3
+task_b_period -> task_b : Deadline
+
+@30
+task_a_period is 4
+task_a_period -> task_a : Deadline
