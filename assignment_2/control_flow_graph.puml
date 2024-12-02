@@ -1,0 +1,23 @@
+@startuml
+start
+
+: A;
+: B;
+
+while (C)
+  if (D)
+    : E;
+  else ()
+    : F;
+  endif
+
+  if (G) then
+    : H;
+  endif
+
+    : I;
+
+endwhile
+
+stop
+@enduml

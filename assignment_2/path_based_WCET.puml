@@ -1,0 +1,23 @@
+@startuml
+start
+
+: A (5);
+: B (5);
+
+while (C (7))
+  if (D (15))
+    : E (8);
+  else ()
+    : F (10);
+  endif
+
+  if (G (15)) then
+    : H (14);
+  endif
+
+    : I (5);
+
+endwhile
+
+stop
+@enduml

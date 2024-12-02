@@ -1,0 +1,111 @@
+@startuml
+'Group A
+'Period = 6
+'Execution Time = 1
+robust "Task A" as task_a
+concise "Task A Period #" as task_a_period
+
+'Group B
+'Period = 8
+'Execution Time = 2
+robust "Task B" as task_b
+concise "Task B Period #" as task_b_period
+
+'Group C
+'Period = 12
+'Execution Time = 3
+robust "Task C" as task_c
+concise "Task C Period #" as task_c_period
+
+'Group TBS
+'Period = 12
+'Execution Time = 3
+robust "Task TBS" as task_tbs
+concise "Task TBS Period #" as task_tbs_period
+
+'-------------------
+'Earlist deadline first
+
+@-1
+task_a is Idle
+task_b is Idle
+task_c is Idle
+task_tbs is Idle
+
+@0
+task_a_period is 1
+task_b_period is 1
+task_c_period is 1
+task_tbs_period is 1
+
+task_a is Processing
+
+@1
+task_a is Idle
+task_a_period -> task_a : Done
+
+task_b is Processing
+
+@3
+task_b is Idle
+task_b_period -> task_b : Done
+
+task_c is Processing
+
+@4
+task_tbs_period -> task_tbs : A1 released
+
+@6
+task_tbs_period -> task_tbs : A2 released
+task_tbs is Processing: A1 Processing
+
+task_c is Idle
+task_c_period -> task_c : Done
+
+@8
+task_tbs is Idle
+task_tbs_period -> task_tbs : A1 Done
+
+task_a is Processing
+
+@9
+task_a is Idle
+task_a_period -> task_a : Done
+
+task_tbs is Processing: A2 Processing
+
+@11
+task_tbs is Idle
+task_tbs_period -> task_tbs : A2 Done
+
+task_b is Processing
+
+@13
+task_b is Idle
+task_b_period -> task_b : Done
+
+'--------------------
+
+@6
+task_a_period is 2
+task_a_period -> task_a : Deadline
+
+@8
+task_b_period is 2
+task_b_period -> task_b : Deadline
+
+@10
+task_tbs_period -> task_tbs : A1 Deadline
+
+@12
+task_c_period is 2
+task_c_period -> task_c : Deadline
+
+task_a_period is 3
+task_a_period -> task_a : Deadline
+
+@16
+task_tbs_period -> task_tbs : A2 Deadline
+
+task_b_period is 3
+task_b_period -> task_b : Deadline

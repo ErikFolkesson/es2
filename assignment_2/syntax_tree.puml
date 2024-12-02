@@ -1,0 +1,38 @@
+@startuml
+object A
+A : Local WCET = 5
+object B
+B : Local WCET = 5
+object C
+C : Local WCET = 7
+object D
+D : Local WCET = 15
+D : Sum WCET = 15 + 10 = 25
+object E
+E : Local WCET = 8
+object F
+F : Local WCET = 10
+object G
+G : Local WCET = 15
+G : Sum WCET = 15 + 14 = 29
+object H
+H : Local WCET = 14
+object I
+I : Local WCET = 5
+
+A  --> B
+B  --> loop
+loop : Num Iters = 50
+loop : Sum WCET = 7 + 25 + 29 + 5 = 66
+loop : Loop WCET = 66 * 50 = 3300
+
+loop --> C
+loop --> D
+loop --> G
+loop --> I
+
+D --> E
+D --> F
+
+G --> H
+@enduml
