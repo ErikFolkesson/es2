@@ -1,0 +1,167 @@
+! ----------------------------------------------------------------------
+! File: ex_holostic.fps                                        -*- c-mode -*- 
+! FPSCALC example for holistic scheduling (by ebbe@docs.uu.se) 
+! ----------------------------------------------------------------------
+! This example show a system with 3 transactions (Trans1, Trans2 and Trans3).
+! The transactions are distributed over 2 nodes (smart and dumb).
+!
+! To make things simple, no communications media is modelled (ie. messages are
+! assumed to take 0 time to reach the destination node). 
+! NOTE THAT THE CAN BUS NODE SHALL BE MODELLED IN YOUR EXAMPLE!!!!! 
+!
+! Trans1 is a simple one-task (task Trans1A) transaction which only executes at
+!        the smart node. 
+! Trans2 starts its exection at dumb node (task Trans2A) and completes on smart
+!        node (task Trans2B)
+! Trans3 starts at smart node (task Trans3A), continues on dumb node (task 
+!        Trans3B) and finishes back at smart node (task Trans3C).
+!
+! ----------------------------------------------------------------------
+!
+! TransactionsR will store the response-time for each transaction (this
+! response-time is equal to the response time of the last task in the
+! transaction).
+!
+! JafterA and JafterB stores the inherited jitter after task A, and task B
+! respecive.  (Not all transactions use all values in these arrays!)  When the
+! response-time of task A has been calculated, its value - the computation time 
+! of A is written into JafterA. Task B inherits (ie. copies) this jitter 
+! before calculating its response-time.  
+!
+! ----------------------------------------------------------------------
+
+! Global variables
+indexed TransactionsR, JafterA, JafterB;
+tasks Trans1, Trans2, Trans3;
+
+! ------------------------------
+
+system smart {
+  declarations {
+    indexed T,C,R,J,W;
+    priority P;
+    scalar B;
+    
+    ! Task names
+    tasks Trans1A, Trans2B, Trans3A, Trans3C;
+  }
+
+  initialise {
+    T[Trans1A] = 30;
+    T[Trans2B] = 100;
+    T[Trans3A] = 100;
+    T[Trans3C] = 100;
+
+    ! The release jitter is 10 for start time triggered transactions.  
+    ! Transaction which do not start at this node will inherit jitter 
+    ! in the formulas
+    J[Trans1A] = 10;
+    J[Trans2B] = 0;
+    J[Trans3A] = 10;
+    J[Trans3C] = 0;
+    
+    C[Trans1A] = 5;
+    C[Trans2B] = 20;
+    C[Trans3A] = 10;
+    C[Trans3C] = 20;
+
+    P[Trans1A] = 2;
+    P[Trans2B] = 1;
+    P[Trans3A] = 3;
+    P[Trans3C] = 4;
+
+    ! All tasks have identical blocking factor
+    B = 10;
+  }
+
+  formulas {
+    ! Inherit jitter from previous tasks in transaction
+    J[Trans2B] = JafterA[Trans2];
+    J[Trans3C] = JafterB[Trans3];
+  
+    ! Calculate the response-times
+    W[i] = C[i] + B + sigma(hp, ceiling((W[i]+J[j])/T[j]) * C[j]);
+    R[i] = W[i] + J[i];
+
+    ! Store response-time either as 
+    ! * jitter to be inherited by a successor task in the transaction, or
+    ! * response-time for transaction (if last task in transaction).
+    TransactionsR[Trans1] = R[Trans1A];
+    TransactionsR[Trans2] = R[Trans2B];
+    JafterA[Trans3] = R[Trans3A];
+    TransactionsR[Trans3] = R[Trans3C];
+  }
+}
+
+! ------------------------------
+
+system dumb {
+  declarations {
+    indexed T,C,R,J,W;
+    priority P;
+    scalar B;
+
+    tasks Trans2A, Trans3B;
+  }
+
+  initialise {
+    T[Trans2A] = 100;
+    T[Trans3B] = 100;
+    
+    ! The release jitter is 10 for time triggered transactions.  
+    ! Transaction which do not start at this node will inherit 
+    ! jitter in the formulas
+    J[Trans2A] = 10;
+    J[Trans3B] = 0;
+
+    C[Trans2A] = 20;
+    C[Trans3B] = 20;
+
+    P[Trans2A] = 1;
+    P[Trans3B] = 2;
+
+    ! All tasks have identical blocking factor
+    B = 10;
+  }
+
+  formulas {
+    ! Inherit jitter from previous tasks in transaction
+    J[Trans3B] = JafterA[Trans3];
+    
+    ! Calculate the response-times
+    W[i] = C[i] + B + sigma(hp, ceiling((W[i]+J[j])/T[j]) * C[j]);
+    R[i] = W[i] + J[i];
+
+    ! Store response-time either as 
+    ! * jitter to be inherited by a successor task in the transaction, or
+    ! * response-time for transaction (if last task in transaction).
+    JafterA[Trans2] = R[Trans2A];
+    JafterB[Trans3] = R[Trans3B];
+  }
+}
+
+
+! ------------------------------
+
+system global {
+  ! Declare a variable R with the same structure as the global TransactionsR
+  declarations {
+    indexed R;
+    tasks Trans1, Trans2, Trans3;
+  }
+  
+  ! Initialise global variables
+  initialise {
+    TransactionsR[i] = 0;
+    JafterA[i] = 0;
+    JafterB[i] = 0;
+  }
+
+  formulas {
+    ! This copying is necessary to print the final values of the TransactionsR
+    ! variable :(
+
+    R[i] = TransactionsR[i];
+  }
+}
+
