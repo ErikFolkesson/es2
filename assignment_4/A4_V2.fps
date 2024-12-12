@@ -4,7 +4,7 @@ tasks Trans1, Trans2, Trans3;
 
 system SensorActuatorA {
     declarations {
-        indexed T, C, J, R, W;
+        indexed T, C, J, R, W, utilization;
         priority P;
 
         tasks trans1_sense, trans1_act, P1, P2, P3;
@@ -17,11 +17,11 @@ system SensorActuatorA {
         T[P2] = 15;
         T[P3] = 50;
 
-        ! Priority is determined using DM.
-        P[trans1_sense] = 3;
-        P[trans1_act] = 4;
+        ! Priority is determined using RM.
+        P[trans1_sense] = 2;
+        P[trans1_act] = 3;
         P[P1] = 1;
-        P[P2] = 2;
+        P[P2] = 4;
         P[P3] = 5;
 
         C[trans1_sense] = 1;
@@ -43,6 +43,8 @@ system SensorActuatorA {
     W[i] = C[i] + sigma(hp, ceiling((W[i]+J[j])/T[j]) * C[j]);
     R[i] = W[i] + J[i];
 
+    utilization[i] = sigma(all, C[j]/T[j]);
+
     ! Store response-time either as
     ! * jitter to be inherited by a successor task in the transaction, or
     ! * response-time for transaction (if last task in transaction).
@@ -53,7 +55,7 @@ system SensorActuatorA {
 
 system SensorActuatorB {
     declarations {
-        indexed T, C, J, R, W;
+        indexed T, C, J, R, W, utilization;
         priority P;
 
         tasks trans2_sense, trans2_act, P1, P2, P3;
@@ -66,11 +68,11 @@ system SensorActuatorB {
         T[P2] = 15;
         T[P3] = 50;
 
-        ! Priority is determined using DM.
-        P[trans2_sense] = 3;
-        P[trans2_act] = 4;
+        ! Priority is determined using RM.
+        P[trans2_sense] = 2;
+        P[trans2_act] = 3;
         P[P1] = 1;
-        P[P2] = 2;
+        P[P2] = 4;
         P[P3] = 5;
 
         C[trans2_sense] = 1;
@@ -92,6 +94,8 @@ system SensorActuatorB {
     W[i] = C[i] + sigma(hp, ceiling((W[i]+J[j])/T[j]) * C[j]);
     R[i] = W[i] + J[i];
 
+    utilization[i] = sigma(all, C[j]/T[j]);
+
     ! Store response-time either as
     ! * jitter to be inherited by a successor task in the transaction, or
     ! * response-time for transaction (if last task in transaction).
@@ -102,7 +106,7 @@ system SensorActuatorB {
 
 system SensorActuatorC {
     declarations {
-        indexed T, C, J, R, W;
+        indexed T, C, J, R, W, utilization;
         priority P;
 
         tasks trans3_sense, trans3_act, P1, P2, P3;
@@ -115,12 +119,12 @@ system SensorActuatorC {
         T[P2] = 15;
         T[P3] = 50;
 
-        ! Priority is determined using DM.
-        P[trans3_sense] = 4;
-        P[trans3_act] = 5;
+        ! Priority is determined using RM.
+        P[trans3_sense] = 3;
+        P[trans3_act] = 4;
         P[P1] = 1;
         P[P2] = 2;
-        P[P3] = 3;
+        P[P3] = 5;
 
         C[trans3_sense] = 2;
         C[trans3_act] = 1;
@@ -141,6 +145,8 @@ system SensorActuatorC {
     W[i] = C[i] + sigma(hp, ceiling((W[i]+J[j])/T[j]) * C[j]);
     R[i] = W[i] + J[i];
 
+    utilization[i] = sigma(all, C[j]/T[j]);
+
     ! Store response-time either as
     ! * jitter to be inherited by a successor task in the transaction, or
     ! * response-time for transaction (if last task in transaction).
@@ -151,7 +157,7 @@ system SensorActuatorC {
 
 system CANBus {
     declarations {
-        indexed T, C, J, R, W, msg_size;
+        indexed T, C, J, R, W, msg_size, utilization;
         scalar bit_per_millisecond;
         priority P;
 
@@ -210,6 +216,8 @@ system CANBus {
         W[i] = C[i] + sigma(hp, ceiling((W[i]+J[j])/T[j]) * C[j]);
         R[i] = W[i] + J[i];
 
+        utilization[i] = sigma(all, C[j]/T[j]);
+
         ! TODO: Rewrite so that it is correct!
         ! Store response-time either as
         ! * jitter to be inherited by a successor task in the transaction, or
@@ -226,7 +234,7 @@ system CANBus {
 
 system ControlNodeD {
     declarations {
-        indexed T, C, J, R, W;
+        indexed T, C, J, R, W, utilization;
         priority P;
 
         tasks trans1_calc, trans2_calc, trans3_calc;
@@ -255,6 +263,8 @@ system ControlNodeD {
     ! Calculate the response-times
     W[i] = C[i] + sigma(hp, ceiling((W[i]+J[j])/T[j]) * C[j]);
     R[i] = W[i] + J[i];
+
+    utilization[i] = sigma(all, C[j]/T[j]);
 
     ! Store response-time either as jitter to be inherited by a successor task in the transaction
     JafterD[Trans1] = R[trans1_calc];

@@ -1,0 +1,333 @@
+
+
+System 'SensorActuatorA'
+-------------------
+
+J[trans1_sense] = 0.000000
+J[trans1_act] = 3.533333
+J[P1] = 0.000000
+J[P2] = 2.000000
+J[P3] = 5.000000
+
+W[trans1_sense] = 2.000000
+W[trans1_act] = 3.000000
+W[P1] = 1.000000
+W[P2] = 5.000000
+W[P3] = 8.000000
+
+R[trans1_sense] = 2.000000
+R[trans1_act] = 6.533333
+R[P1] = 1.000000
+R[P2] = 7.000000
+R[P3] = 13.000000
+
+utilization[trans1_sense] = 0.553333
+utilization[trans1_act] = 0.553333
+utilization[P1] = 0.553333
+utilization[P2] = 0.553333
+utilization[P3] = 0.553333
+
+JafterX[Trans1] = 2.000000
+JafterX[Trans2] = 2.000000
+JafterX[Trans3] = 5.000000
+
+TransactionsR[Trans1] = 6.533333
+TransactionsR[Trans2] = 9.706667
+TransactionsR[Trans3] = 22.200000
+
+
+System 'SensorActuatorB'
+-------------------
+
+J[trans2_sense] = 0.000000
+J[trans2_act] = 6.706667
+J[P1] = 0.000000
+J[P2] = 2.000000
+J[P3] = 5.000000
+
+W[trans2_sense] = 2.000000
+W[trans2_act] = 3.000000
+W[P1] = 1.000000
+W[P2] = 7.000000
+W[P3] = 8.000000
+
+R[trans2_sense] = 2.000000
+R[trans2_act] = 9.706667
+R[P1] = 1.000000
+R[P2] = 9.000000
+R[P3] = 13.000000
+
+utilization[trans2_sense] = 0.553333
+utilization[trans2_act] = 0.553333
+utilization[P1] = 0.553333
+utilization[P2] = 0.553333
+utilization[P3] = 0.553333
+
+JafterX[Trans1] = 2.000000
+JafterX[Trans2] = 2.000000
+JafterX[Trans3] = 5.000000
+
+TransactionsR[Trans1] = 6.533333
+TransactionsR[Trans2] = 9.706667
+TransactionsR[Trans3] = 22.200000
+
+
+System 'SensorActuatorC'
+-------------------
+
+J[trans3_sense] = 0.000000
+J[trans3_act] = 15.200000
+J[P1] = 0.000000
+J[P2] = 2.000000
+J[P3] = 5.000000
+
+W[trans3_sense] = 5.000000
+W[trans3_act] = 7.000000
+W[P1] = 1.000000
+W[P2] = 3.000000
+W[P3] = 9.000000
+
+R[trans3_sense] = 5.000000
+R[trans3_act] = 22.200000
+R[P1] = 1.000000
+R[P2] = 5.000000
+R[P3] = 14.000000
+
+utilization[trans3_sense] = 0.503333
+utilization[trans3_act] = 0.503333
+utilization[P1] = 0.503333
+utilization[P2] = 0.503333
+utilization[P3] = 0.503333
+
+JafterX[Trans1] = 2.000000
+JafterX[Trans2] = 2.000000
+JafterX[Trans3] = 5.000000
+
+TransactionsR[Trans1] = 6.533333
+TransactionsR[Trans2] = 9.706667
+TransactionsR[Trans3] = 22.200000
+
+
+System 'CANBus'
+-------------------
+
+J[trans1_sense] = 2.000000
+J[trans1_act] = 3.213333
+J[trans2_sense] = 2.000000
+J[trans2_act] = 5.746667
+J[trans3_sense] = 5.000000
+J[trans3_act] = 13.386667
+
+J[trans1_sense] = 2.000000
+J[trans1_act] = 3.213333
+J[trans2_sense] = 2.000000
+J[trans2_act] = 5.746667
+J[trans3_sense] = 5.000000
+J[trans3_act] = 13.386667
+
+J[trans1_sense] = 2.000000
+J[trans1_act] = 3.213333
+J[trans2_sense] = 2.000000
+J[trans2_act] = 5.746667
+J[trans3_sense] = 5.000000
+J[trans3_act] = 13.386667
+
+J[trans1_sense] = 2.000000
+J[trans1_act] = 3.213333
+J[trans2_sense] = 2.000000
+J[trans2_act] = 5.746667
+J[trans3_sense] = 5.000000
+J[trans3_act] = 13.386667
+
+J[trans1_sense] = 2.000000
+J[trans1_act] = 3.213333
+J[trans2_sense] = 2.000000
+J[trans2_act] = 5.746667
+J[trans3_sense] = 5.000000
+J[trans3_act] = 13.386667
+
+J[trans1_sense] = 2.000000
+J[trans1_act] = 3.213333
+J[trans2_sense] = 2.000000
+J[trans2_act] = 5.746667
+J[trans3_sense] = 5.000000
+J[trans3_act] = 13.386667
+
+bit_per_millisecond = 0.013333
+
+msg_size[trans1_sense] = 16.000000
+msg_size[trans1_act] = 8.000000
+msg_size[trans2_sense] = 32.000000
+msg_size[trans2_act] = 16.000000
+msg_size[trans3_sense] = 32.000000
+msg_size[trans3_act] = 32.000000
+
+msg_size[trans1_sense] = 16.000000
+msg_size[trans1_act] = 8.000000
+msg_size[trans2_sense] = 32.000000
+msg_size[trans2_act] = 16.000000
+msg_size[trans3_sense] = 32.000000
+msg_size[trans3_act] = 32.000000
+
+C[trans1_sense] = 0.213333
+C[trans1_act] = 0.106667
+C[trans2_sense] = 0.426667
+C[trans2_act] = 0.213333
+C[trans3_sense] = 0.426667
+C[trans3_act] = 0.426667
+
+C[trans1_sense] = 0.213333
+C[trans1_act] = 0.106667
+C[trans2_sense] = 0.426667
+C[trans2_act] = 0.213333
+C[trans3_sense] = 0.426667
+C[trans3_act] = 0.426667
+
+msg_size[trans1_sense] = 16.000000
+msg_size[trans1_act] = 8.000000
+msg_size[trans2_sense] = 32.000000
+msg_size[trans2_act] = 16.000000
+msg_size[trans3_sense] = 32.000000
+msg_size[trans3_act] = 32.000000
+
+msg_size[trans1_sense] = 16.000000
+msg_size[trans1_act] = 8.000000
+msg_size[trans2_sense] = 32.000000
+msg_size[trans2_act] = 16.000000
+msg_size[trans3_sense] = 32.000000
+msg_size[trans3_act] = 32.000000
+
+C[trans1_sense] = 0.213333
+C[trans1_act] = 0.106667
+C[trans2_sense] = 0.426667
+C[trans2_act] = 0.213333
+C[trans3_sense] = 0.426667
+C[trans3_act] = 0.426667
+
+C[trans1_sense] = 0.213333
+C[trans1_act] = 0.106667
+C[trans2_sense] = 0.426667
+C[trans2_act] = 0.213333
+C[trans3_sense] = 0.426667
+C[trans3_act] = 0.426667
+
+msg_size[trans1_sense] = 16.000000
+msg_size[trans1_act] = 8.000000
+msg_size[trans2_sense] = 32.000000
+msg_size[trans2_act] = 16.000000
+msg_size[trans3_sense] = 32.000000
+msg_size[trans3_act] = 32.000000
+
+msg_size[trans1_sense] = 16.000000
+msg_size[trans1_act] = 8.000000
+msg_size[trans2_sense] = 32.000000
+msg_size[trans2_act] = 16.000000
+msg_size[trans3_sense] = 32.000000
+msg_size[trans3_act] = 32.000000
+
+C[trans1_sense] = 0.213333
+C[trans1_act] = 0.106667
+C[trans2_sense] = 0.426667
+C[trans2_act] = 0.213333
+C[trans3_sense] = 0.426667
+C[trans3_act] = 0.426667
+
+C[trans1_sense] = 0.213333
+C[trans1_act] = 0.106667
+C[trans2_sense] = 0.426667
+C[trans2_act] = 0.213333
+C[trans3_sense] = 0.426667
+C[trans3_act] = 0.426667
+
+W[trans1_sense] = 0.213333
+W[trans1_act] = 0.320000
+W[trans2_sense] = 0.746667
+W[trans2_act] = 0.960000
+W[trans3_sense] = 1.386667
+W[trans3_act] = 1.813333
+
+R[trans1_sense] = 2.213333
+R[trans1_act] = 3.533333
+R[trans2_sense] = 2.746667
+R[trans2_act] = 6.706667
+R[trans3_sense] = 6.386667
+R[trans3_act] = 15.200000
+
+utilization[trans1_sense] = 0.138667
+utilization[trans1_act] = 0.138667
+utilization[trans2_sense] = 0.138667
+utilization[trans2_act] = 0.138667
+utilization[trans3_sense] = 0.138667
+utilization[trans3_act] = 0.138667
+
+JafterCAN_1[Trans1] = 2.213333
+JafterCAN_1[Trans2] = 2.746667
+JafterCAN_1[Trans3] = 6.386667
+
+JafterCAN_1[Trans1] = 2.213333
+JafterCAN_1[Trans2] = 2.746667
+JafterCAN_1[Trans3] = 6.386667
+
+JafterCAN_1[Trans1] = 2.213333
+JafterCAN_1[Trans2] = 2.746667
+JafterCAN_1[Trans3] = 6.386667
+
+JafterCAN_2[Trans1] = 3.533333
+JafterCAN_2[Trans2] = 6.706667
+JafterCAN_2[Trans3] = 15.200000
+
+JafterCAN_2[Trans1] = 3.533333
+JafterCAN_2[Trans2] = 6.706667
+JafterCAN_2[Trans3] = 15.200000
+
+JafterCAN_2[Trans1] = 3.533333
+JafterCAN_2[Trans2] = 6.706667
+JafterCAN_2[Trans3] = 15.200000
+
+
+System 'ControlNodeD'
+-------------------
+
+J[trans1_calc] = 2.213333
+J[trans2_calc] = 2.746667
+J[trans3_calc] = 6.386667
+
+J[trans1_calc] = 2.213333
+J[trans2_calc] = 2.746667
+J[trans3_calc] = 6.386667
+
+J[trans1_calc] = 2.213333
+J[trans2_calc] = 2.746667
+J[trans3_calc] = 6.386667
+
+W[trans1_calc] = 1.000000
+W[trans2_calc] = 3.000000
+W[trans3_calc] = 7.000000
+
+R[trans1_calc] = 3.213333
+R[trans2_calc] = 5.746667
+R[trans3_calc] = 13.386667
+
+utilization[trans1_calc] = 0.500000
+utilization[trans2_calc] = 0.500000
+utilization[trans3_calc] = 0.500000
+
+JafterD[Trans1] = 3.213333
+JafterD[Trans2] = 5.746667
+JafterD[Trans3] = 13.386667
+
+JafterD[Trans1] = 3.213333
+JafterD[Trans2] = 5.746667
+JafterD[Trans3] = 13.386667
+
+JafterD[Trans1] = 3.213333
+JafterD[Trans2] = 5.746667
+JafterD[Trans3] = 13.386667
+
+
+System 'global'
+-------------------
+
+R[Trans1] = 6.533333
+R[Trans2] = 9.706667
+R[Trans3] = 22.200000
