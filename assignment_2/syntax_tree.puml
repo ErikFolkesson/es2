@@ -24,7 +24,7 @@ A  --> B
 B  --> loop
 loop : Num Iters = 50
 loop : Sum WCET = 7 + 25 + 29 + 5 = 66
-loop : Loop WCET = 66 * 50 = 3300
+loop : Loop WCET = 66 * 51 = 3366
 
 loop --> C
 loop --> D

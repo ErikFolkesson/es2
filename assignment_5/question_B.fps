@@ -1,0 +1,40 @@
+system NodeA {
+    declarations {
+        indexed T, C, J, R, W, utilization;
+        priority P;
+
+        tasks task_1, task_2, task_3;
+    }
+
+    initialise {
+        T[task_1] = 5;
+        T[task_2] = 10;
+        T[task_3] = 20;
+
+        ! Priority is determined using RM.
+        P[task_1] = 1;
+        P[task_2] = 2;
+        P[task_3] = 3;
+
+        C[task_1] = 2;
+        C[task_2] = 4;
+        C[task_3] = 6;
+    }
+
+    formulas {
+    ! Inherit jitter from previous the CAN bus in the transaction
+    J[trans1_act] = JafterCAN_2[Trans1];
+
+    ! Calculate the response-times
+    W[i] = C[i] + sigma(hp, ceiling((W[i]+J[j])/T[j]) * C[j]);
+    R[i] = W[i] + J[i];
+
+    utilization[i] = sigma(all, C[j]/T[j]);
+
+    ! Store response-time either as
+    ! * jitter to be inherited by a successor task in the transaction, or
+    ! * response-time for transaction (if last task in transaction).
+    JafterX[Trans1] = R[trans1_sense];
+    TransactionsR[Trans1] = R[trans1_act];
+  }
+}

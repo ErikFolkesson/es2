@@ -1,0 +1,103 @@
+@startuml
+robust "Node A: Task 1" as NodeA_1
+robust "Node A: Task 2" as NodeA_2
+robust "Node A: Task 3" as NodeA_3
+robust "CAN" as CAN
+robust "Node B: Task 1" as NodeB_1
+robust "Node B: Task 2" as NodeB_2
+robust "Node B: Task 3" as NodeB_3
+
+@-1
+NodeA_1 is Ready
+NodeA_2 is Ready
+NodeA_3 is Ready
+CAN is Ready
+NodeB_1 is Ready
+NodeB_2 is Ready
+NodeB_3 is Ready
+
+@0
+NodeA_1 is Running: Message Received
+NodeB_1 is Running
+
+@1
+NodeA_1 is Ready
+NodeA_1 -> NodeA_2: Message Sent to A2 but Missed
+
+NodeB_1 is Ready
+
+NodeA_2 is Running
+NodeB_2 is Running
+
+@2
+NodeA_3 is Running
+NodeB_3 is Running
+
+NodeA_2 is Ready
+NodeB_2 is Ready
+
+@3
+NodeA_3 is Ready
+NodeB_3 is Ready
+
+@5
+NodeA_1 is Running
+NodeB_1 is Running
+
+@6
+NodeA_1 is Ready
+
+NodeB_1 is Ready
+NodeA_1 -> NodeA_2: Previous Message Received
+
+NodeA_2 is Running
+NodeB_2 is Running
+
+@7
+NodeA_2 is Ready
+NodeB_2 is Ready
+
+NodeA_2 -> CAN: Message Sent to CAN (Message 3 in CAN)
+
+CAN is Message_1
+
+NodeA_3 is Running
+NodeB_3 is Running
+
+@7.3
+CAN is Message_2
+
+@7.6
+CAN is Message_3
+
+@7.9
+CAN is Ready
+CAN -> NodeB_1: Message Sent to B1 but not received yet
+
+@8
+NodeA_3 is Ready
+NodeB_3 is Ready
+
+@10
+NodeA_1 is Running
+NodeB_1 is Running
+
+CAN -> NodeB_1: Previous Message Received
+
+@11
+NodeA_1 is Ready
+NodeB_1 is Ready
+
+NodeB_1 -> NodeB_2: Message Sent to B1 but not received yet
+
+@12
+NodeA_2 is Running
+NodeB_2 is Running
+
+NodeB_1 -> NodeB_2: Message Sent from B2 Received
+
+@13
+NodeA_2 is Ready
+NodeB_2 is Ready: Completed
+
+@enduml

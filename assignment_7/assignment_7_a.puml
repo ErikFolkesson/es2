@@ -1,0 +1,80 @@
+@startuml
+'VM1:
+'Budget = 2
+'Period = 4
+'Priority = High
+
+'VM2:
+'Budget = 3
+'Period = 8
+'Priority = Medium
+
+'VM3:
+'Budget = 2
+'Period = 16
+'Priority = Low
+concise "CPU" as CPU
+
+'VM1 Tasks:
+'Task = t1, Execution Time (C) = 2, Period (T) = 8, Deadline (D) = 8, Priority = High
+'Task = t2, Execution Time (C) = 3, Period (T) = 16, Deadline (D) = 16, Priority = Medium
+'Task = t3, Execution Time (C) = 2, Period (T) = 32, Deadline (D) = 32, Priority = Low
+concise "Virtual Machine 1" as VM1
+
+'VM2 Tasks:
+'Task = t4, Execution Time (C) = 3, Period (T) = 16, Deadline (D) = 10, Priority = High
+'Task = t5, Execution Time (C) = 3, Period (T) = 16, Deadline (D) = 15, Priority = Medium
+concise "Virtual Machine 2" as VM2
+
+'VM3 Tasks:
+'Task = t6, Execution Time (C) = 2, Period (T) = 16, Deadline (D) = 14, Priority = High
+concise "Virtual Machine 3" as VM3
+
+@0
+CPU is VM1
+VM1 is t1
+VM2 is Idle
+VM3 is Idle
+
+@2
+CPU is VM2
+VM1 is Idle
+VM2 is t4: (2/3)
+
+@4
+CPU is VM1
+VM1 is t2: (2/3)
+VM2 is Idle
+
+@6
+CPU is VM2
+VM1 is Idle
+VM2 is t4: (3/3)
+
+@7
+CPU is VM3: (1/2)
+VM2 is Idle
+VM3 is t6: (1/2)
+
+@8
+CPU is VM1
+VM1 is t1
+VM3 is Idle
+
+@10
+CPU is VM2
+VM1 is Idle
+VM2 is t5: (2/3)
+
+@12
+CPU is VM1
+VM1 is t2: (3/3)
+VM2 is Idle
+
+@13
+VM1 is t3: (1/2)
+
+@14
+CPU is VM3: (2/2)
+VM1 is Idle
+VM3 is t6: (2/2)
